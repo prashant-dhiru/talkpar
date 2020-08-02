@@ -4,5 +4,5 @@ const socket = io('http://localhost:3000/',{
 });
 
 socket.on('connect',()=>{
-    socket.emit('requestJoin',{meetingName: 'room2'});
+    console.log("connection successfull with server")
 })
