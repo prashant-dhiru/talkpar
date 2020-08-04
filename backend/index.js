@@ -8,6 +8,7 @@ rooms = ['room1', 'room2', 'room3'];
 
 io.on('connection',socket =>{
     console.log(socket.adapter.sids);
+    // console.log(io.clients().connected);
     socket.emit('hello', 'word');
 })
 
