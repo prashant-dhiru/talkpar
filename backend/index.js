@@ -7,9 +7,9 @@ const io = require('socket.io')(server);
 rooms = ['room1', 'room2', 'room3'];
 
 io.on('connection',socket =>{
-    console.log(socket.adapter.sids);
+    console.log(socket.id);
     // console.log(io.clients().connected);
-    socket.emit('hello', 'word');
+    socket.emit('hello', 'world');
 })
 
 server.listen(PORT, function(){

@@ -4,7 +4,7 @@
   "description": "codebase for API and Socket.IO",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "mocha"
   },
   "author": "prashant dhirendra",
   "dependencies": {

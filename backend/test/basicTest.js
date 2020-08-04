@@ -10,31 +10,47 @@ const socketOption = {
 
 describe('Suite of unit tests', function() {
 
-    let socket;
+    let client1;
 
-    before(function(done) {
-        // Setup
-        socket = io.connect('http://localhost:3000', socketOption);
-        socket.on('connect', function() {
+    beforeEach(function(done){
+        client2 = io.connect('http://localhost:3000', socketOption);
+
+        client2.on('connect', function() {
             done();
         });
     });
 
-    after(function(done) {
+    afterEach(function(done) {
         // Cleanup
-        if(socket.connected) {
-            socket.disconnect();
+        
+        if(client2.connected) {
+            client2.disconnect();
         }
         done();
     });
  
     describe('First (hopefully useful) test', function() {
-        it('connect to server', function(done) {
-            socket.on('hello', function(data) {
-                expect(data).to.equal('word');
+        it('client1 connect to server', function(done) {
+            client1 = io.connect('http://localhost:3000', socketOption);
+            client1.on('connect', function(data){
+                client1.on('hello', function(data) {
+                    try{
+                        client1.disconnect();
+                        expect(data).to.equal('word');
+                        done();
+                    }
+                    catch(e){
+                        done(e);
+                    }
+                });
+            })
+        });
+
+        it('client2 connect to server', function(done) {
+            client2.on('hello', function(data) {
+                expect(data).to.equal('world');
                 done();
             });
         });
     });
-
 });
